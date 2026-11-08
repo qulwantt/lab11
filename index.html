@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 11 - Вивчення мови (jQuery)</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .app-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .flashcard {
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            color: #333;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+        .flashcard:hover {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            border-color: #ccc;
+        }
+        .navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .nav-arrow {
+            cursor: pointer;
+            font-size: 20px;
+            user-select: none;
+        }
+        .nav-arrow:hover {
+            color: #007bff;
+        }
+        .translation-input {
+            width: 80%;
+            padding: 10px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 15px;
+            outline: none;
+        }
+        .stats-title {
+            color: #007bff;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .statistics {
+            display: flex;
+            justify-content: space-around;
+            font-weight: bold;
+        }
+        .stat-correct {
+            color: #00cc00;
+        }
+        .stat-incorrect {
+            color: #ff0000;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        .modal-box {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            width: 80%;
+            max-width: 300px;
+        }
+        .modal-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="flashcard" id="card">
+            <span id="wordDisplay">always</span>
+        </div>
+        
+        <div class="navigation">
+            <span class="nav-arrow" id="prevBtn">&larr;</span>
+            <span id="stepCounter">1/10</span>
+            <span class="nav-arrow" id="nextBtn">&rarr;</span>
+        </div>
+
+        <input type="text" id="translationInput" class="translation-input" placeholder="введіть переклад">
+
+        <div class="stats-title">Статистика</div>
+        <div class="statistics">
+            <div class="stat-correct">
+                Вірно<br><span id="correctScore">0</span>
+            </div>
+            <div class="stat-incorrect">
+                Невірно<br><span id="incorrectScore">0</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="resultModal">
+        <div class="modal-box">
+            <h2 style="margin-top:0; color:#007bff;">Результат</h2>
+            <p id="modalLevelText" style="font-size: 18px; font-weight: bold;"></p>
+            <button class="modal-btn" id="closeModalBtn">Завершити</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
